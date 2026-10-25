@@ -2,6 +2,9 @@
   "name": "web-portfolio",
   "private": true,
   "version": "0.0.0",
+  "engines": {
+    "node": "^20.19.0 || >=22.12.0"
+  },
   "type": "module",
   "scripts": {
     "dev": "vite",
@@ -11,6 +14,7 @@
   },
   "dependencies": {
     "@fontsource-variable/inter": "^5.3.0",
+    "@iconify-icons/logos": "^2.0.4",
     "@radix-ui/react-menubar": "^1.2.1",
     "@radix-ui/react-slot": "^1.5.0",
     "@rolldown/binding-win32-x64-msvc": "^1.2.15",
@@ -21,13 +25,17 @@
     "lucide-react": "^1.61.0",
     "react": "^19.3.1",
     "react-dom": "^19.3.1",
+    "simple-icons": "^16.35.0",
     "tailwind-merge": "^3.7.0",
-    "tailwindcss": "^4.3.3"
+    "tailwindcss": "^4.3.3",
+    "three": "^0.134.0",
+    "vanta": "^0.5.24"
   },
   "devDependencies": {
     "@types/node": "^24.19.2",
     "@types/react": "^19.3.0",
     "@types/react-dom": "^19.3.0",
+    "@types/three": "^0.134.0",
     "@vitejs/plugin-react": "^6.1.2",
     "oxlint": "^1.88.0",
     "typescript": "~6.0.3",

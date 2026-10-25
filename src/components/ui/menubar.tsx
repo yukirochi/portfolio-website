@@ -1,7 +1,7 @@
 import * as React from "react"
 import { cn } from "@/lib/utils"
 import * as MenubarPrimitive from "@radix-ui/react-menubar"
-import { CheckIcon, ChevronRightIcon } from "lucide-react"
+import { CheckIcon, ChevronRightIcon, Menu, X } from "lucide-react"
 
 function Menubar({
   className,
@@ -258,122 +258,59 @@ function MenubarSubContent({
 }
 
 function MenubarDemo() {
+  const [isOpen, setIsOpen] = React.useState(false)
+  const sections = [
+    { label: "Home", href: "#home" },
+    { label: "GitHub", href: "#github-contributions" },
+    { label: "Tools", href: "#tools" },
+    { label: "Experience", href: "#experience" },
+    { label: "Certifications", href: "#certifications" },
+    { label: "Projects", href: "#projects" },
+  ]
+
   return (
-    <Menubar className="w-fit bg-white/80 px-4">
-      <MenubarMenu>
-        <MenubarTrigger>File</MenubarTrigger>
-        <MenubarContent>
-          <MenubarGroup>
-            <MenubarItem>
-              New Tab <MenubarShortcut>⌘T</MenubarShortcut>
-            </MenubarItem>
-            <MenubarItem>
-              New Window <MenubarShortcut>⌘N</MenubarShortcut>
-            </MenubarItem>
-            <MenubarItem disabled>New Incognito Window</MenubarItem>
-          </MenubarGroup>
-          <MenubarSeparator />
-          <MenubarGroup>
-            <MenubarSub>
-              <MenubarSubTrigger>Share</MenubarSubTrigger>
-              <MenubarSubContent>
-                <MenubarGroup>
-                  <MenubarItem>Email link</MenubarItem>
-                  <MenubarItem>Messages</MenubarItem>
-                  <MenubarItem>Notes</MenubarItem>
-                </MenubarGroup>
-              </MenubarSubContent>
-            </MenubarSub>
-          </MenubarGroup>
-          <MenubarSeparator />
-          <MenubarGroup>
-            <MenubarItem>
-              Print... <MenubarShortcut>⌘P</MenubarShortcut>
-            </MenubarItem>
-          </MenubarGroup>
-        </MenubarContent>
-      </MenubarMenu>
-      <MenubarMenu>
-        <MenubarTrigger>Edit</MenubarTrigger>
-        <MenubarContent>
-          <MenubarGroup>
-            <MenubarItem>
-              Undo <MenubarShortcut>⌘Z</MenubarShortcut>
-            </MenubarItem>
-            <MenubarItem>
-              Redo <MenubarShortcut>⇧⌘Z</MenubarShortcut>
-            </MenubarItem>
-          </MenubarGroup>
-          <MenubarSeparator />
-          <MenubarGroup>
-            <MenubarSub>
-              <MenubarSubTrigger>Find</MenubarSubTrigger>
-              <MenubarSubContent>
-                <MenubarGroup>
-                  <MenubarItem>Search the web</MenubarItem>
-                </MenubarGroup>
-                <MenubarSeparator />
-                <MenubarGroup>
-                  <MenubarItem>Find...</MenubarItem>
-                  <MenubarItem>Find Next</MenubarItem>
-                  <MenubarItem>Find Previous</MenubarItem>
-                </MenubarGroup>
-              </MenubarSubContent>
-            </MenubarSub>
-          </MenubarGroup>
-          <MenubarSeparator />
-          <MenubarGroup>
-            <MenubarItem>Cut</MenubarItem>
-            <MenubarItem>Copy</MenubarItem>
-            <MenubarItem>Paste</MenubarItem>
-          </MenubarGroup>
-        </MenubarContent>
-      </MenubarMenu>
-      <MenubarMenu>
-        <MenubarTrigger>View</MenubarTrigger>
-        <MenubarContent className="w-44">
-          <MenubarGroup>
-            <MenubarCheckboxItem>Bookmarks Bar</MenubarCheckboxItem>
-            <MenubarCheckboxItem checked>Full URLs</MenubarCheckboxItem>
-          </MenubarGroup>
-          <MenubarSeparator />
-          <MenubarGroup>
-            <MenubarItem inset>
-              Reload <MenubarShortcut>⌘R</MenubarShortcut>
-            </MenubarItem>
-            <MenubarItem disabled inset>
-              Force Reload <MenubarShortcut>⇧⌘R</MenubarShortcut>
-            </MenubarItem>
-          </MenubarGroup>
-          <MenubarSeparator />
-          <MenubarGroup>
-            <MenubarItem inset>Toggle Fullscreen</MenubarItem>
-          </MenubarGroup>
-          <MenubarSeparator />
-          <MenubarGroup>
-            <MenubarItem inset>Hide Sidebar</MenubarItem>
-          </MenubarGroup>
-        </MenubarContent>
-      </MenubarMenu>
-      <MenubarMenu>
-        <MenubarTrigger>Profiles</MenubarTrigger>
-        <MenubarContent>
-          <MenubarRadioGroup value="benoit">
-            <MenubarRadioItem value="andy">Andy</MenubarRadioItem>
-            <MenubarRadioItem value="benoit">Benoit</MenubarRadioItem>
-            <MenubarRadioItem value="Luis">Luis</MenubarRadioItem>
-          </MenubarRadioGroup>
-          <MenubarSeparator />
-          <MenubarGroup>
-            <MenubarItem inset>Edit...</MenubarItem>
-          </MenubarGroup>
-          <MenubarSeparator />
-          <MenubarGroup>
-            <MenubarItem inset>Add Profile...</MenubarItem>
-          </MenubarGroup>
-        </MenubarContent>
-      </MenubarMenu>
-    </Menubar>
+    <nav aria-label="Main navigation" className="relative w-fit max-w-full">
+      <div className="hidden w-fit items-center gap-1 rounded-lg border bg-white/80 p-1 dark:bg-zinc-950/80 sm:flex">
+        {sections.map(({ label, href }) => (
+          <a
+            className="whitespace-nowrap rounded-md px-3 py-2 text-sm font-medium text-zinc-600 transition-colors hover:bg-zinc-100 hover:text-zinc-950 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-zinc-500 dark:text-zinc-400 dark:hover:bg-zinc-800 dark:hover:text-zinc-50"
+            href={href}
+            key={href}
+          >
+            {label}
+          </a>
+        ))}
+      </div>
+      <div className="sm:hidden">
+        <button
+          aria-controls="mobile-section-navigation"
+          aria-expanded={isOpen}
+          aria-label={isOpen ? "Close section navigation" : "Open section navigation"}
+          className="flex size-10 items-center justify-center rounded-lg border bg-white/90 text-zinc-800 shadow-sm transition-colors hover:bg-zinc-100 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-zinc-500 dark:bg-zinc-950/90 dark:text-zinc-100 dark:hover:bg-zinc-800"
+          onClick={() => setIsOpen((open) => !open)}
+          type="button"
+        >
+          {isOpen ? <X aria-hidden="true" size={20} /> : <Menu aria-hidden="true" size={20} />}
+        </button>
+        {isOpen && (
+          <div
+            className="absolute left-0 top-full z-50 mt-2 flex w-[min(18rem,calc(100vw-3rem))] flex-col rounded-xl border bg-white p-2 shadow-lg dark:bg-zinc-950"
+            id="mobile-section-navigation"
+          >
+            {sections.map(({ label, href }) => (
+              <a
+                className="rounded-lg px-3 py-3 text-sm font-medium text-zinc-700 transition-colors hover:bg-zinc-100 focus-visible:outline-2 focus-visible:outline-zinc-500 dark:text-zinc-300 dark:hover:bg-zinc-800"
+                href={href}
+                key={href}
+                onClick={() => setIsOpen(false)}
+              >
+                {label}
+              </a>
+            ))}
+          </div>
+        )}
+      </div>
+    </nav>
   )
 }
 

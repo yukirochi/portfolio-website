@@ -3,6 +3,26 @@
 
 @custom-variant dark (&:is(.dark *));
 
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 6rem;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+.portfolio-background {
+  position: fixed;
+  z-index: 0;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  opacity: 0.24;
+}
+
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
@@ -46,7 +66,31 @@
     Consolas, "Liberation Mono", "Courier New", monospace;
   --animate-accordion-down: accordion-down 0.2s ease-out;
   --animate-accordion-up: accordion-up 0.2s ease-out;
+  --animate-certificate-reveal: certificate-reveal 450ms ease-out both;
+  --animate-certificate-hide: certificate-hide 350ms ease-in both;
   --animate-underline-pulse: underline-pulse 2s ease-in-out infinite;
+
+  @keyframes certificate-reveal {
+    from {
+      opacity: 0;
+      transform: translateY(0.75rem);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes certificate-hide {
+    from {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    to {
+      opacity: 0;
+      transform: translateY(0.5rem);
+    }
+  }
 
   @keyframes accordion-down {
     from {

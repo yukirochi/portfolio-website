@@ -17,6 +17,7 @@ lerna-debug.log*
 /dist-ssr/
 /coverage/
 /.vite/
+/.vercel/
 *.local
 *.tsbuildinfo
 
@@ -34,3 +35,4 @@ Thumbs.db
 *.njsproj
 *.sln
 *.sw?
+node_modules
